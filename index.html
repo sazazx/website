@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skillbridg Learning Academy — Learning Redefined</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+/* ═══════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════ */
+:root {
+  --deep:     #0a052a;
+  --blue:     #029fe0;
+  --blue-dim: rgba(2,159,224,0.11);
+  --blue-bdr: rgba(2,159,224,0.22);
+  --blue-h:   #00b8ff;
+  --white:    #ffffff;
+  --off:      #f4f9fd;
+  --ink:      #0e1a30;
+  --ink-60:   rgba(14,26,48,0.60);
+  --ink-30:   rgba(14,26,48,0.28);
+  --ink-8:    rgba(14,26,48,0.06);
+  --bdr:      rgba(14,26,48,0.09);
+  --bdr-md:   rgba(14,26,48,0.14);
+  --sh-sm:    0 2px 16px rgba(14,26,48,0.07);
+  --sh-md:    0 8px 40px rgba(14,26,48,0.12);
+  --sh-blue:  0 8px 32px rgba(2,159,224,0.22);
+  --nav-h:    68px;
+  --ease:     cubic-bezier(0.22,0.61,0.36,1);
+}
+
+/* ═══════════════════════════════════════
+   RESET
+═══════════════════════════════════════ */
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'DM Sans',system-ui,sans-serif; color:var(--ink); background:var(--white); overflow-x:hidden; -webkit-font-smoothing:antialiased; }
+img  { max-width:100%; display:block; }
+a    { text-decoration:none; color:inherit; }
+::-webkit-scrollbar       { width:4px; }
+::-webkit-scrollbar-track { background:var(--off); }
+::-webkit-scrollbar-thumb { background:var(--blue); border-radius:99px; }
+
+/* ═══════════════════════════════════════
+   LAYOUT
+═══════════════════════════════════════ */
+.container { width:100%; max-width:1200px; margin:0 auto; padding:0 48px; }
+
+/* ═══════════════════════════════════════
+   TYPOGRAPHY
+═══════════════════════════════════════ */
+.lbl { display:inline-flex; align-items:center; gap:10px; font-size:10px; font-weight:600; letter-spacing:3.5px; text-transform:uppercase; color:var(--blue); }
+.lbl::before { content:''; width:26px; height:1px; background:var(--blue); flex-shrink:0; }
+.lbl.ctr { justify-content:center; }
+.lbl.lt  { color:rgba(2,159,224,0.85); }
+.lbl.lt::before { background:rgba(2,159,224,0.85); }
+
+.h2 { font-family:'DM Serif Display',Georgia,serif; font-size:clamp(30px,3.6vw,50px); font-weight:400; line-height:1.09; letter-spacing:-.5px; color:var(--ink); margin-bottom:16px; }
+.h2 em { font-style:italic; color:var(--blue); }
+.h2.lt { color:var(--white); }
+.h2.lt em { color:var(--blue-h); }
+
+.body { font-size:15px; font-weight:400; line-height:1.8; color:var(--ink-60); }
+.body.lt { color:rgba(255,255,255,0.46); }
+
+/* ═══════════════════════════════════════
+   BUTTONS
+═══════════════════════════════════════ */
+.btn { display:inline-flex; align-items:center; gap:10px; font-family:'DM Sans',sans-serif; font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; padding:13px 26px; border-radius:2px; border:none; cursor:pointer; transition:all .24s var(--ease); white-space:nowrap; }
+.btn-bl  { background:var(--blue); color:#fff; box-shadow:0 4px 18px rgba(2,159,224,0.28); }
+.btn-bl:hover  { background:var(--blue-h); box-shadow:var(--sh-blue); transform:translateY(-2px); }
+.btn-ol  { background:transparent; color:var(--ink); border:1px solid var(--bdr-md); }
+.btn-ol:hover  { border-color:var(--blue); color:var(--blue); }
+.btn-olw { background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.28); }
+.btn-olw:hover { border-color:var(--blue); color:var(--blue-h); }
+.arr { font-size:15px; transition:transform .2s var(--ease); }
+.btn:hover .arr { transform:translateX(5px); }
+
+/* ═══════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════ */
+#nav { position:fixed; top:0; left:0; right:0; z-index:1000; height:var(--nav-h); background:rgba(255,255,255,0.97); border-bottom:1px solid var(--bdr); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px); transition:box-shadow .3s; }
+#nav.sc { box-shadow:0 4px 28px rgba(14,26,48,0.08); }
+
+.navi { max-width:1200px; margin:0 auto; padding:0 48px; height:100%; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+
+.nlogo { display:flex; align-items:center; gap:12px; flex-shrink:0; }
+.nlogo img { height:40px; width:auto; }
+.nlt  { display:flex; flex-direction:column; line-height:1; }
+.nln  { font-size:13px; font-weight:700; color:var(--ink); letter-spacing:3px; text-transform:uppercase; }
+.nltg { font-size:8px; font-weight:500; color:var(--blue); letter-spacing:2.5px; text-transform:uppercase; margin-top:4px; }
+
+.nlinks { display:flex; gap:0; list-style:none; flex:1; justify-content:center; }
+.nlinks a { font-size:11px; font-weight:500; letter-spacing:1.5px; text-transform:uppercase; color:var(--ink-60); padding:8px 14px; position:relative; transition:color .2s; }
+.nlinks a::after { content:''; position:absolute; bottom:3px; left:14px; right:14px; height:1.5px; background:var(--blue); transform:scaleX(0); transform-origin:left; transition:transform .25s var(--ease); }
+.nlinks a:hover { color:var(--ink); }
+.nlinks a:hover::after { transform:scaleX(1); }
+
+.nr   { display:flex; align-items:center; gap:12px; flex-shrink:0; }
+.nexp { font-size:11px; font-weight:500; letter-spacing:1.5px; text-transform:uppercase; color:var(--ink-60); padding:8px 0; border-bottom:1px solid transparent; transition:all .2s; }
+.nexp:hover { color:var(--blue); border-bottom-color:var(--blue); }
+.ncta { font-size:10.5px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#fff; padding:10px 22px; border-radius:2px; background:var(--blue); box-shadow:0 4px 14px rgba(2,159,224,0.28); transition:all .22s var(--ease); }
+.ncta:hover { background:var(--blue-h); box-shadow:var(--sh-blue); transform:translateY(-1px); }
+
+/* Hamburger */
+.hbg { display:none; flex-direction:column; justify-content:center; gap:5px; cursor:pointer; padding:6px; background:none; border:none; z-index:1100; flex-shrink:0; }
+.hbg span { display:block; width:22px; height:1.5px; background:var(--ink); transition:all .3s; }
+.hbg.op span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
+.hbg.op span:nth-child(2) { opacity:0; transform:scaleX(0); }
+.hbg.op span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
+
+/* Mobile nav */
+.mnav { display:none; position:fixed; inset:0; z-index:999; background:var(--white); flex-direction:column; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity .3s; }
+.mnav.op { opacity:1; pointer-events:all; }
+.mnav a { font-size:13px; font-weight:500; letter-spacing:2.5px; text-transform:uppercase; color:var(--ink-60); padding:15px 0; border-bottom:1px solid var(--bdr); width:220px; text-align:center; transition:color .2s; }
+.mnav a:hover { color:var(--blue); }
+.mnav-cta { margin-top:24px; background:var(--blue)!important; color:#fff!important; padding:13px 40px!important; border-radius:2px!important; border-bottom:none!important; }
+
+/* ═══════════════════════════════════════
+   HERO  (white background)
+═══════════════════════════════════════ */
+#hero { min-height:100vh; background:var(--white); display:flex; align-items:center; padding:var(--nav-h) 0 0; position:relative; overflow:hidden; }
+
+.hgrid { position:absolute; inset:0; pointer-events:none;
+  background-image: linear-gradient(rgba(2,159,224,0.06) 1px,transparent 1px), linear-gradient(90deg,rgba(2,159,224,0.06) 1px,transparent 1px);
+  background-size:72px 72px;
+  mask-image:radial-gradient(ellipse 75% 75% at 50% 50%,black 40%,transparent 100%); }
+
+.hglow { position:absolute; border-radius:50%; filter:blur(120px); pointer-events:none; }
+.hglow1 { width:560px; height:560px; background:radial-gradient(circle,rgba(2,159,224,0.10) 0%,transparent 70%); top:-120px; right:-80px; }
+.hglow2 { width:320px; height:320px; background:radial-gradient(circle,rgba(10,5,42,0.04) 0%,transparent 70%); bottom:60px; left:5%; }
+
+.hinner { position:relative; z-index:2; display:grid; grid-template-columns:1fr 400px; gap:72px; align-items:center; width:100%; max-width:1200px; margin:0 auto; padding:88px 48px 108px; }
+
+.htag { display:inline-flex; align-items:center; gap:9px; border:1px solid var(--blue-bdr); background:var(--blue-dim); padding:6px 14px; border-radius:2px; font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--blue); margin-bottom:26px; }
+.tdot { width:5px; height:5px; border-radius:50%; background:#3ECF8E; flex-shrink:0; }
+
+.hh1 { font-family:'DM Serif Display',Georgia,serif; font-size:clamp(38px,5vw,64px); font-weight:400; line-height:1.05; letter-spacing:-1px; color:var(--deep); margin-bottom:22px; }
+.hh1 em { font-style:italic; color:var(--blue); }
+
+.hsub { font-size:15px; color:var(--ink-60); line-height:1.82; margin-bottom:38px; max-width:480px; }
+.hact { display:flex; gap:12px; flex-wrap:wrap; }
+
+/* Hero panel */
+.hpanel { background:var(--off); border:1px solid var(--bdr-md); border-radius:4px; overflow:hidden; box-shadow:var(--sh-md); }
+.phead  { padding:16px 22px; border-bottom:1px solid var(--bdr); display:flex; align-items:center; justify-content:space-between; background:var(--white); }
+.ptitle { font-size:9.5px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--ink-30); }
+.pbadge { font-size:9px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:#3ECF8E; background:rgba(62,207,142,0.1); border:1px solid rgba(62,207,142,0.2); padding:3px 9px; border-radius:20px; }
+
+.pfeat { display:flex; align-items:flex-start; gap:14px; padding:17px 22px; border-bottom:1px solid var(--bdr); background:var(--white); transition:background .2s; }
+.pfeat:last-child { border-bottom:none; }
+.pfeat:hover { background:var(--off); }
+.pfic { width:36px; height:36px; border-radius:6px; flex-shrink:0; background:var(--blue-dim); border:1px solid var(--blue-bdr); display:flex; align-items:center; justify-content:center; font-size:16px; }
+.pftx h4 { font-size:12.5px; font-weight:600; color:var(--ink); margin-bottom:3px; }
+.pftx p  { font-size:11.5px; color:var(--ink-60); line-height:1.6; }
+
+/* Scroll cue */
+.scue { position:absolute; bottom:32px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:8px; color:var(--ink-30); font-size:9px; letter-spacing:2.5px; text-transform:uppercase; }
+.sln  { width:1px; height:38px; background:linear-gradient(to bottom,var(--blue-bdr),transparent); animation:sp 2s ease-in-out infinite; }
+@keyframes sp { 0%,100%{opacity:.3;} 50%{opacity:.9;} }
+
+/* ═══════════════════════════════════════
+   SECTOR TICKER
+═══════════════════════════════════════ */
+#tkr { padding:20px 0; border-top:1px solid var(--bdr); border-bottom:1px solid var(--bdr); background:var(--off); overflow:hidden; }
+.tki { display:flex; align-items:center; }
+.tkl { font-size:9px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:var(--ink-30); white-space:nowrap; padding:0 40px 0 0; border-right:1px solid var(--bdr); margin-right:40px; flex-shrink:0; }
+.tkw { overflow:hidden; flex:1; position:relative; }
+.tkw::before,.tkw::after { content:''; position:absolute; top:0; bottom:0; width:80px; z-index:2; }
+.tkw::before { left:0; background:linear-gradient(to right,var(--off),transparent); }
+.tkw::after  { right:0; background:linear-gradient(to left,var(--off),transparent); }
+.tkt { display:flex; width:max-content; animation:tk 30s linear infinite; }
+.tkt:hover { animation-play-state:paused; }
+@keyframes tk { 0%{transform:translateX(0);} 100%{transform:translateX(-50%);} }
+.ti { font-size:10.5px; font-weight:600; letter-spacing:2.5px; text-transform:uppercase; color:var(--ink-30); padding:0 32px; white-space:nowrap; border-right:1px solid var(--bdr); transition:color .2s; }
+.ti:hover { color:var(--blue); }
+
+/* ═══════════════════════════════════════
+   SECTION SHARED
+═══════════════════════════════════════ */
+.sec { padding:96px 0; }
+
+.sh { margin-bottom:52px; }
+.sh .lbl { margin-bottom:14px; }
+.sh.ctr { text-align:center; }
+.sh.ctr .lbl { justify-content:center; }
+.sh.ctr .body { margin:0 auto; max-width:480px; }
+.sh.btw { display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:24px; }
+.sh.btw .body { max-width:360px; }
+
+/* ═══════════════════════════════════════
+   SERVICES
+═══════════════════════════════════════ */
+#services { background:var(--white); }
+
+.svl { display:flex; flex-direction:column; border:1px solid var(--bdr); border-radius:4px; overflow:hidden; }
+.svr { display:grid; grid-template-columns:64px 1fr 52px; align-items:stretch; border-bottom:1px solid var(--bdr); transition:background .18s; position:relative; cursor:pointer; }
+.svr:last-child { border-bottom:none; }
+.svr::after { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--blue); transform:scaleY(0); transform-origin:bottom; transition:transform .28s var(--ease); }
+.svr:hover { background:var(--off); }
+.svr:hover::after { transform:scaleY(1); }
+.svnum { display:flex; align-items:center; justify-content:center; font-family:'DM Serif Display',serif; font-size:11px; color:var(--ink-30); border-right:1px solid var(--bdr); padding:26px 0; }
+.svb   { padding:26px 30px; display:flex; align-items:flex-start; gap:16px; }
+.svic  { width:42px; height:42px; border-radius:6px; flex-shrink:0; background:var(--ink-8); border:1px solid var(--bdr); display:flex; align-items:center; justify-content:center; font-size:18px; transition:background .18s,border-color .18s; }
+.svr:hover .svic { background:var(--blue-dim); border-color:var(--blue-bdr); }
+.svt h3 { font-size:15px; font-weight:600; color:var(--ink); margin-bottom:5px; letter-spacing:-.2px; }
+.svt p  { font-size:13px; color:var(--ink-60); line-height:1.7; margin-bottom:10px; }
+.svtags { display:flex; flex-wrap:wrap; gap:6px; }
+.svtag  { font-size:9px; font-weight:600; letter-spacing:1.2px; text-transform:uppercase; color:var(--blue); background:var(--blue-dim); border:1px solid var(--blue-bdr); padding:3px 9px; border-radius:2px; }
+.svarr  { display:flex; align-items:center; justify-content:center; font-size:17px; color:var(--bdr-md); border-left:1px solid var(--bdr); transition:color .2s,transform .2s; }
+.svr:hover .svarr { color:var(--blue); transform:translateX(2px); }
+
+/* ═══════════════════════════════════════
+   APPROACH
+═══════════════════════════════════════ */
+#approach { background:var(--off); }
+
+.apg { display:grid; grid-template-columns:360px 1fr; gap:80px; align-items:start; }
+.apst { position:sticky; top:calc(var(--nav-h) + 28px); }
+.apst .body { margin-bottom:30px; }
+
+.tline { display:flex; flex-direction:column; position:relative; }
+.tline::before { content:''; position:absolute; left:26px; top:52px; bottom:52px; width:1px; background:linear-gradient(to bottom,var(--bdr),var(--bdr-md),var(--bdr)); }
+.tls { display:flex; gap:22px; align-items:flex-start; padding:26px 0; border-bottom:1px solid var(--bdr); }
+.tls:last-child { border-bottom:none; }
+.tln { width:52px; height:52px; border-radius:3px; border:1px solid var(--bdr-md); background:var(--white); display:flex; align-items:center; justify-content:center; font-family:'DM Serif Display',serif; font-size:19px; color:var(--ink-30); flex-shrink:0; z-index:1; transition:all .25s; }
+.tls:hover .tln { border-color:var(--blue); color:var(--blue); background:var(--blue-dim); box-shadow:var(--sh-blue); }
+.tlb { padding-top:12px; }
+.tlb h4 { font-size:15.5px; font-weight:600; color:var(--ink); margin-bottom:7px; letter-spacing:-.2px; }
+.tlb p  { font-size:13.5px; color:var(--ink-60); line-height:1.72; }
+.tlb ul { margin-top:8px; padding-left:16px; }
+.tlb ul li { font-size:12.5px; color:var(--ink-60); line-height:1.8; }
+
+/* ═══════════════════════════════════════
+   WHY US
+═══════════════════════════════════════ */
+#why { background:var(--white); }
+
+.wyg { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+.wyc .body  { margin-bottom:34px; max-width:440px; }
+.wybt { display:flex; gap:12px; flex-wrap:wrap; }
+.wyf  { display:flex; flex-direction:column; gap:1px; background:var(--bdr); border:1px solid var(--bdr); border-radius:4px; overflow:hidden; }
+.wf   { display:flex; gap:16px; align-items:flex-start; background:var(--white); padding:22px 26px; transition:background .2s; }
+.wf:hover { background:var(--off); }
+.wfic { width:38px; height:38px; border-radius:6px; flex-shrink:0; background:var(--blue); display:flex; align-items:center; justify-content:center; font-size:16px; transition:transform .22s; }
+.wf:hover .wfic { transform:scale(1.08); }
+.wfb h5 { font-size:13.5px; font-weight:600; color:var(--ink); margin-bottom:4px; }
+.wfb p  { font-size:12.5px; color:var(--ink-60); line-height:1.65; }
+
+/* ═══════════════════════════════════════
+   TESTIMONIALS
+═══════════════════════════════════════ */
+#testi { background:var(--deep); }
+
+.tcg  { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+.tc   { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:4px; padding:30px; transition:all .3s var(--ease); position:relative; overflow:hidden; }
+.tc::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--blue),var(--blue-h),transparent); transform:scaleX(0); transform-origin:left; transition:transform .35s var(--ease); }
+.tc:hover { background:rgba(255,255,255,0.07); transform:translateY(-4px); }
+.tc:hover::before { transform:scaleX(1); }
+.tcq  { font-family:'DM Serif Display',serif; font-size:52px; line-height:.8; color:var(--blue); opacity:.25; display:block; margin-bottom:14px; }
+.tc p { font-size:13.5px; color:rgba(255,255,255,0.68); line-height:1.78; margin-bottom:22px; font-style:italic; }
+.tcr  { height:1px; background:rgba(255,255,255,0.08); margin-bottom:18px; }
+.tca  { display:flex; align-items:center; gap:12px; }
+.tcav { width:36px; height:36px; border-radius:50%; flex-shrink:0; background:var(--blue); display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; color:#fff; }
+.tcn  { font-size:12.5px; font-weight:600; color:rgba(255,255,255,0.82); }
+.tco  { font-size:11px; color:rgba(255,255,255,0.34); margin-top:2px; }
+
+/* ═══════════════════════════════════════
+   CONTACT
+═══════════════════════════════════════ */
+#contact { background:var(--white); }
+
+.ctg { display:grid; grid-template-columns:5fr 7fr; gap:72px; align-items:start; }
+.cti .body { margin-bottom:36px; }
+.cis  { display:flex; flex-direction:column; border:1px solid var(--bdr); border-radius:4px; overflow:hidden; margin-bottom:36px; }
+.cir  { display:flex; align-items:center; gap:14px; padding:16px 20px; border-bottom:1px solid var(--bdr); transition:background .2s; }
+.cir:last-child { border-bottom:none; }
+.cir:hover { background:var(--off); }
+.ciico { width:38px; height:38px; border-radius:6px; flex-shrink:0; background:var(--blue-dim); border:1px solid var(--blue-bdr); display:flex; align-items:center; justify-content:center; font-size:15px; }
+.cilbl { font-size:9px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--ink-30); }
+.cival { font-size:13.5px; font-weight:500; color:var(--ink); margin-top:2px; }
+.cival a { color:var(--ink); transition:color .2s; }
+.cival a:hover { color:var(--blue); }
+
+.slbl { font-size:9px; font-weight:600; letter-spacing:2.5px; text-transform:uppercase; color:var(--ink-30); margin-bottom:12px; display:block; }
+.srow { display:flex; gap:8px; }
+.slk  { width:36px; height:36px; border-radius:4px; background:var(--off); border:1px solid var(--bdr); display:flex; align-items:center; justify-content:center; transition:all .22s; }
+.slk:hover { background:var(--blue-dim); border-color:var(--blue-bdr); }
+
+/* Contact form */
+.cfrm { background:var(--off); border:1px solid var(--bdr); border-radius:4px; padding:36px; }
+.r2   { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.fg   { margin-bottom:14px; }
+.fg label { display:block; font-size:9px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--ink-60); margin-bottom:6px; }
+.fg input, .fg textarea, .fg select { width:100%; padding:12px 14px; background:#fff; border:1px solid var(--bdr-md); border-radius:2px; color:var(--ink); font-family:'DM Sans',sans-serif; font-size:13.5px; outline:none; transition:border-color .2s,box-shadow .2s; appearance:none; -webkit-appearance:none; }
+.fg input:focus, .fg textarea:focus, .fg select:focus { border-color:var(--blue); box-shadow:0 0 0 3px rgba(2,159,224,0.10); }
+.fg textarea { resize:vertical; min-height:100px; line-height:1.6; }
+.fg select { cursor:pointer; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%230e1a30' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 13px center; padding-right:36px; }
+.sbtn { width:100%; padding:14px; background:var(--blue); border:none; border-radius:2px; font-family:'DM Sans',sans-serif; font-size:11px; font-weight:600; letter-spacing:2.5px; color:#fff; text-transform:uppercase; cursor:pointer; box-shadow:0 5px 18px rgba(2,159,224,0.28); transition:all .22s var(--ease); display:flex; align-items:center; justify-content:center; gap:10px; }
+.sbtn:hover { background:var(--blue-h); box-shadow:var(--sh-blue); transform:translateY(-2px); }
+
+/* Performance closing banner */
+.perf-banner { background:var(--blue-dim); border:1px solid var(--blue-bdr); border-radius:4px; padding:22px 28px; margin-bottom:36px; }
+.perf-banner p { font-size:14px; color:var(--ink); line-height:1.7; font-style:italic; }
+.perf-banner strong { font-weight:700; color:var(--blue); font-style:normal; }
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+.facc   { height:3px; background:linear-gradient(90deg,transparent,var(--blue),var(--blue-h),var(--blue),transparent); opacity:.7; }
+footer  { background:var(--deep); border-top:1px solid rgba(2,159,224,0.12); }
+.fmain  { padding:56px 0 44px; }
+.fg2    { display:grid; grid-template-columns:2.2fr 1fr 1fr 1fr; gap:44px; }
+.fbl    { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+.fbl img{ height:36px; width:auto; }
+.fbp    { font-size:12.5px; color:rgba(255,255,255,0.3); line-height:1.75; max-width:236px; margin-bottom:20px; }
+.fsr    { display:flex; gap:8px; }
+.fsc    { width:32px; height:32px; border-radius:4px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.09); display:flex; align-items:center; justify-content:center; transition:all .2s; }
+.fsc:hover { background:var(--blue-dim); border-color:var(--blue-bdr); }
+.fc h5  { font-size:9px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,0.28); margin-bottom:18px; }
+.fc ul  { list-style:none; }
+.fc li  { margin-bottom:10px; }
+.fc a   { font-size:13px; color:rgba(255,255,255,0.42); transition:color .2s; }
+.fc a:hover { color:var(--blue-h); }
+.fbot   { border-top:1px solid rgba(255,255,255,0.07); padding:20px 0; }
+.fbot .container { display:flex; justify-content:space-between; align-items:center; font-size:11px; color:rgba(255,255,255,0.22); flex-wrap:wrap; gap:8px; }
+.fbot strong { color:rgba(255,255,255,0.4); }
+
+/* ═══════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════ */
+.sr { opacity:0; transform:translateY(22px); transition:opacity .7s var(--ease),transform .7s var(--ease); }
+.sr.vis { opacity:1; transform:none; }
+.d1{transition-delay:.1s;} .d2{transition-delay:.2s;} .d3{transition-delay:.3s;} .d4{transition-delay:.4s;}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE — 1024px
+═══════════════════════════════════════ */
+@media(max-width:1024px){
+  .container,.navi { padding:0 36px; }
+  .hinner { gap:48px; padding:80px 36px 100px; }
+  .fg2    { gap:24px; }
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE — 900px
+═══════════════════════════════════════ */
+@media(max-width:900px){
+  .nlinks,.nexp,.ncta { display:none; }
+  .hbg  { display:flex; }
+  .mnav { display:flex; }
+  #hero { min-height:auto; }
+  .hinner { grid-template-columns:1fr; gap:0; }
+  .hpanel { display:none; }
+  .apg  { grid-template-columns:1fr; gap:48px; }
+  .apst { position:static; }
+  .wyg  { grid-template-columns:1fr; gap:48px; }
+  .tcg  { grid-template-columns:1fr 1fr; gap:16px; }
+  .ctg  { grid-template-columns:1fr; gap:48px; }
+  .fg2  { grid-template-columns:1fr 1fr; gap:28px; }
+  .tkl  { display:none; }
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE — 640px  (MOBILE ENHANCED)
+═══════════════════════════════════════ */
+@media(max-width:640px){
+  :root { --nav-h:60px; }
+
+  /* ── Layout & spacing ── */
+  .container,.navi { padding:0 18px; }
+  .sec  { padding:52px 0; }          /* tighter page-to-page space */
+  .hinner { padding:44px 18px 64px; }
+  .sh   { margin-bottom:36px; }
+
+  /* ── Hero ── */
+  .hh1  { font-size:clamp(30px,8.5vw,42px); line-height:1.08; }
+  .htag { font-size:9px; padding:5px 11px; letter-spacing:1.5px; }
+  .hsub { font-size:14px; margin-bottom:28px; }
+  .hact { flex-direction:column; gap:10px; }
+  .hact .btn { justify-content:center; width:100%; padding:15px 20px; font-size:11px; min-height:48px; border-radius:3px; }
+
+  /* ── Services ── */
+  .svr  { grid-template-columns:42px 1fr; }
+  .svarr{ display:none; }
+  .svb  { padding:16px 14px; gap:12px; }
+  .svnum{ font-size:10px; }
+  .svic { width:36px; height:36px; font-size:15px; }
+  .svt h3 { font-size:14px; }
+  .svt p  { font-size:12.5px; }
+  .svtag  { font-size:8.5px; padding:3px 8px; }
+
+  /* ── Approach timeline ── */
+  .tline::before { left:22px; }
+  .tln  { width:44px; height:44px; font-size:16px; }
+  .tls  { gap:16px; padding:20px 0; }
+  .tlb  { padding-top:8px; }
+  .tlb h4 { font-size:14.5px; }
+  .tlb p  { font-size:13px; }
+  .tlb ul li { font-size:12px; }
+
+  /* ── Why cards ── */
+  .wf   { padding:18px 16px; gap:12px; }
+  .wfic { width:36px; height:36px; font-size:14px; }
+  .wfb h5 { font-size:13px; }
+  .wfb p  { font-size:12px; }
+  .wybt { flex-direction:column; gap:10px; }
+  .wybt .btn { justify-content:center; width:100%; min-height:48px; border-radius:3px; }
+
+  /* ── Testimonials ── */
+  .tcg  { grid-template-columns:1fr; gap:14px; }
+  .tc   { padding:24px 20px; }
+  .tcq  { font-size:40px; }
+  .tc p { font-size:13px; }
+
+  /* ── Contact ── */
+  .cfrm { padding:20px 16px; border-radius:4px; }
+  .r2   { grid-template-columns:1fr; gap:0; }
+  .fg   { margin-bottom:12px; }
+  .fg input, .fg textarea, .fg select { font-size:14px; padding:13px 14px; min-height:48px; border-radius:3px; }
+  .fg textarea { min-height:90px; }
+  .sbtn { padding:15px; min-height:52px; font-size:11px; letter-spacing:2px; border-radius:3px; }
+  .cis  { border-radius:4px; }
+  .cir  { padding:14px 16px; gap:12px; min-height:60px; }
+  .ciico{ width:36px; height:36px; font-size:14px; border-radius:5px; }
+  .cival { font-size:13px; }
+  .slk  { width:44px; height:44px; border-radius:5px; }
+  .perf-banner { padding:16px 18px; }
+  .perf-banner p { font-size:13.5px; }
+
+  /* ── Footer ── */
+  .fg2  { grid-template-columns:1fr; gap:32px; }
+  .fmain{ padding:44px 0 32px; }
+  .fbot .container { flex-direction:column; text-align:center; gap:6px; }
+
+  /* ── Section headers ── */
+  .h2   { font-size:clamp(26px,7.5vw,36px); }
+  .sh.btw { flex-direction:column; gap:12px; align-items:flex-start; }
+  .sh.btw .body { max-width:100%; }
+
+  /* ── Ticker ── */
+  #tkr { padding:14px 0; }
+  .ti  { font-size:9.5px; padding:0 20px; }
+}
+
+@media(max-width:380px){
+  .hh1 { font-size:28px; }
+  .hinner { padding:36px 16px 56px; }
+}
+
+/* ═══════════════════════════════════════
+   FORM STATES
+═══════════════════════════════════════ */
+.sbtn:disabled { opacity:.7; cursor:not-allowed; transform:none !important; box-shadow:none !important; }
+
+/* Success overlay */
+.form-success {
+  display:none; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; padding:48px 24px; gap:16px;
+}
+.form-success.show { display:flex; }
+.cfrm.sent .form-fields { display:none; }
+.cfrm.sent .form-success { display:flex; }
+
+.fsc-icon { width:60px; height:60px; border-radius:50%; background:rgba(62,207,142,0.12);
+  border:2px solid rgba(62,207,142,0.3); display:flex; align-items:center;
+  justify-content:center; font-size:26px; animation:pop .4s var(--ease); }
+@keyframes pop { 0%{transform:scale(0.6);opacity:0;} 100%{transform:scale(1);opacity:1;} }
+.fsc-title { font-family:'DM Serif Display',serif; font-size:22px; color:var(--ink); letter-spacing:-.3px; }
+.fsc-body  { font-size:13.5px; color:var(--ink-60); line-height:1.7; max-width:280px; }
+.fsc-reset { font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase;
+  color:var(--blue); background:none; border:none; cursor:pointer; margin-top:8px;
+  padding:8px 0; border-bottom:1px solid var(--blue-bdr); transition:color .2s; }
+.fsc-reset:hover { color:var(--blue-h); }
+
+/* Error message */
+.form-err { display:none; font-size:12px; color:#e05252; margin-top:-8px; margin-bottom:10px; padding:10px 14px;
+  background:rgba(224,82,82,0.06); border:1px solid rgba(224,82,82,0.18); border-radius:3px; }
+.form-err.show { display:block; }
+
+/* Spinner on button */
+.spin { display:inline-block; width:14px; height:14px; border:2px solid rgba(255,255,255,0.3);
+  border-top-color:#fff; border-radius:50%; animation:rot .7s linear infinite; }
+@keyframes rot { to { transform:rotate(360deg); } }
+
+/* Required field asterisk */
+.req { color:var(--blue); }
+</style>
+</head>
+<body>
+
+<!-- ══════════════ NAV ══════════════ -->
+<nav id="nav">
+  <div class="navi">
+    <a href="#hero" class="nlogo">
+      <img src="logo.png" alt="Skillbridg">
+      <div class="nlt">
+        <span class="nln">Skillbridg</span>
+        <span class="nltg">Learning Redefined</span>
+      </div>
+    </a>
+
+    <ul class="nlinks">
+      <li><a href="#hero">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#testi">Stories</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <div class="nr">
+      <a href="#services" class="nexp">Explore Services</a>
+      <a href="#contact"  class="ncta">Connect With Us →</a>
+      <button class="hbg" id="hbg" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<div class="mnav" id="mnav">
+  <a href="#hero"     onclick="cm()">About</a>
+  <a href="#services" onclick="cm()">Services</a>
+  <a href="#approach" onclick="cm()">Approach</a>
+  <a href="#testi"    onclick="cm()">Stories</a>
+  <a href="#contact"  onclick="cm()">Contact</a>
+  <a href="#contact" class="mnav-cta" onclick="cm()">Connect With Us</a>
+</div>
+
+<!-- ══════════════ HERO ══════════════ -->
+<section id="hero">
+  <div class="hgrid"  aria-hidden="true"></div>
+  <div class="hglow hglow1" aria-hidden="true"></div>
+  <div class="hglow hglow2" aria-hidden="true"></div>
+
+  <div class="hinner">
+    <!-- Left copy -->
+    <div>
+      <div class="htag"><span class="tdot"></span> Leading Pre-Sales Intelligence &amp; Performance Consulting Firm</div>
+      <h1 class="hh1">Engineer<br>Performance.<br><em>Drive Results.</em></h1>
+      <p class="hsub">Skillbridg partners with organizations to engineer performance through systems, capability, and culture — delivering measurable and lasting business outcomes across South India.</p>
+      <div class="hact">
+        <a href="#services" class="btn btn-bl">Explore Services <span class="arr">→</span></a>
+      </div>
+    </div>
+
+    <!-- Right panel -->
+    <div class="hpanel sr d2">
+      <div class="phead">
+        <span class="ptitle">Why Organizations Choose Skillbridg</span>
+        <span class="pbadge">● Active</span>
+      </div>
+      <div class="pfeat">
+        <div class="pfic">🎯</div>
+        <div class="pftx"><h4>Customized Performance Solutions</h4><p>Designed around your business goals, industry dynamics, and team capability — never generic or off-the-shelf.</p></div>
+      </div>
+      <div class="pfeat">
+        <div class="pfic">📈</div>
+        <div class="pftx"><h4>Outcome &amp; ROI Driven</h4><p>Every engagement is aligned to measurable KPIs with clear impact on conversion, productivity, and performance.</p></div>
+      </div>
+      <div class="pfeat">
+        <div class="pfic">🏆</div>
+        <div class="pftx"><h4>Practitioner-Led Expertise</h4><p>Led by performance engineers with deep, real-world experience in pre-sales, sales, and business transformation.</p></div>
+      </div>
+      <div class="pfeat">
+        <div class="pfic">⚙️</div>
+        <div class="pftx"><h4>System + Skill Integration</h4><p>We combine structured systems, capability building, and coaching — ensuring performance is consistent, not accidental.</p></div>
+      </div>
+      <div class="pfeat">
+        <div class="pfic">🌏</div>
+        <div class="pftx"><h4>Deep Regional &amp; Market Understanding</h4><p>Strong on-ground experience across South India, enabling context-driven interventions that work in real business environments.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scue"><div class="sln"></div><span>Scroll</span></div>
+</section>
+
+<!-- ══════════════ TICKER ══════════════ -->
+<div id="tkr">
+  <div class="container">
+    <div class="tki">
+      <span class="tkl">Sectors Served</span>
+      <div class="tkw">
+        <div class="tkt">
+          <span class="ti">Real Estate</span><span class="ti">BFSI</span><span class="ti">Manufacturing</span><span class="ti">Healthcare</span><span class="ti">Startups</span><span class="ti">Higher Education</span><span class="ti">Pharma</span><span class="ti">Retail</span><span class="ti">IT Services</span><span class="ti">Engineering</span>
+          <span class="ti">Real Estate</span><span class="ti">BFSI</span><span class="ti">Manufacturing</span><span class="ti">Healthcare</span><span class="ti">Startups</span><span class="ti">Higher Education</span><span class="ti">Pharma</span><span class="ti">Retail</span><span class="ti">IT Services</span><span class="ti">Engineering</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ SERVICES ══════════════ -->
+<section id="services" class="sec">
+  <div class="container">
+    <div class="sh btw sr">
+      <div>
+        <div class="lbl">What We Do</div>
+        <h2 class="h2">Performance Consulting &amp; <em>Capability Transformation</em></h2>
+      </div>
+      <p class="body">Skillbridg enables organizations to convert capability into performance through structured systems, targeted learning interventions, and continuous coaching.</p>
+    </div>
+
+    <div class="svl sr d1">
+      <div class="svr">
+        <div class="svnum">01</div>
+        <div class="svb">
+          <div class="svic">🏢</div>
+          <div class="svt">
+            <h3>Pre-Sales Intelligence Consulting</h3>
+            <p>Designing structured pre-sales systems that improve lead qualification, site visit conversion, and booking outcomes.</p>
+            <div class="svtags"><span class="svtag">Funnel Engineering</span><span class="svtag">Qualification Frameworks</span><span class="svtag">Call Flow &amp; Follow-Up Systems</span></div>
+          </div>
+        </div>
+        <div class="svarr">→</div>
+      </div>
+
+      <div class="svr">
+        <div class="svnum">02</div>
+        <div class="svb">
+          <div class="svic">📈</div>
+          <div class="svt">
+            <h3>Sales &amp; Conversion Excellence</h3>
+            <p>Building sales teams that consistently convert opportunities into revenue through strong communication and customer engagement.</p>
+            <div class="svtags"><span class="svtag">Sales Effectiveness</span><span class="svtag">Customer Experience</span><span class="svtag">Conversion Strategy</span></div>
+          </div>
+        </div>
+        <div class="svarr">→</div>
+      </div>
+
+      <div class="svr">
+        <div class="svnum">03</div>
+        <div class="svb">
+          <div class="svic">🚀</div>
+          <div class="svt">
+            <h3>Leadership &amp; Performance Development</h3>
+            <p>Developing leaders who can drive performance, build accountability, and scale high-performing teams.</p>
+            <div class="svtags"><span class="svtag">First-Time Manager Programs</span><span class="svtag">Leadership Journeys</span><span class="svtag">Executive Coaching</span></div>
+          </div>
+        </div>
+        <div class="svarr">→</div>
+      </div>
+
+      <div class="svr">
+        <div class="svnum">04</div>
+        <div class="svb">
+          <div class="svic">🧠</div>
+          <div class="svt">
+            <h3>Behavioural &amp; Capability Transformation</h3>
+            <p>Enhancing core professional skills that directly impact performance, collaboration, and workplace effectiveness.</p>
+            <div class="svtags"><span class="svtag">Communication Mastery</span><span class="svtag">Emotional Intelligence</span><span class="svtag">Team Effectiveness</span></div>
+          </div>
+        </div>
+        <div class="svarr">→</div>
+      </div>
+
+      <div class="svr">
+        <div class="svnum">05</div>
+        <div class="svb">
+          <div class="svic">⚙️</div>
+          <div class="svt">
+            <h3>Performance Coaching &amp; Capability Reinforcement</h3>
+            <p>Ensuring learning translates into real performance through structured coaching, feedback, and tracking mechanisms.</p>
+            <div class="svtags"><span class="svtag">Call Audits &amp; Feedback</span><span class="svtag">Performance Scorecards</span><span class="svtag">Continuous Coaching</span></div>
+          </div>
+        </div>
+        <div class="svarr">→</div>
+      </div>
+
+      <div class="svr">
+        <div class="svnum">06</div>
+        <div class="svb">
+          <div class="svic">🎓</div>
+          <div class="svt">
+            <h3>Academic &amp; Employability Programs</h3>
+            <p>Preparing students and early professionals with practical, industry-ready skills for successful careers.</p>
+            <div class="svtags"><span class="svtag">Campus to Corporate</span><span class="svtag">Interview Readiness</span><span class="svtag">Career Skills Development</span></div>
+          </div>
+        </div>
+        <div class="svarr">→</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ APPROACH ══════════════ -->
+<section id="approach" class="sec" style="background:var(--off);">
+  <div class="container">
+    <div class="apg">
+      <div class="apst sr">
+        <div class="lbl">Our Methodology</div>
+        <h2 class="h2">The Skillbridg <em>Performance Framework™</em></h2>
+        <p class="body">A structured, execution-driven approach that transforms capability into measurable business performance — not just learning outcomes.</p>
+        <a href="#contact" class="btn btn-bl" style="margin-top:8px;">Start the Conversation <span class="arr">→</span></a>
+      </div>
+
+      <div class="tline sr d2">
+        <div class="tls">
+          <div class="tln">01</div>
+          <div class="tlb">
+            <h4>🔍 Diagnose</h4>
+            <p>Deep performance diagnosis before any intervention. We begin by understanding your business reality, not assumptions.</p>
+            <ul>
+              <li>Leadership alignment &amp; goal mapping</li>
+              <li>Funnel and performance analysis</li>
+              <li>Capability &amp; behavioural gap identification</li>
+              <li>Identification of conversion leakages</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tls">
+          <div class="tln">02</div>
+          <div class="tlb">
+            <h4>🧩 Design</h4>
+            <p>Customized performance architecture. We design solutions aligned to your business goals, team capability, and operating environment.</p>
+            <ul>
+              <li>Role-based learning journeys</li>
+              <li>Pre-sales / performance frameworks</li>
+              <li>Conversion-focused program design</li>
+              <li>KPI-aligned intervention strategy</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tls">
+          <div class="tln">03</div>
+          <div class="tlb">
+            <h4>🚀 Develop</h4>
+            <p>Capability building through structured learning. We build skills that directly impact performance — not theoretical knowledge.</p>
+            <ul>
+              <li>Experiential learning (role plays, simulations)</li>
+              <li>Real-world scenarios &amp; case-based learning</li>
+              <li>Communication, conversion &amp; behavioural training</li>
+              <li>High-impact, practitioner-led sessions</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tls">
+          <div class="tln">04</div>
+          <div class="tlb">
+            <h4>📊 Drive</h4>
+            <p>Ensuring learning translates into performance. We go beyond training to drive consistent execution and measurable outcomes.</p>
+            <ul>
+              <li>Call audits &amp; performance reviews</li>
+              <li>One-on-one coaching interventions</li>
+              <li>Performance scorecards &amp; tracking</li>
+              <li>Continuous reinforcement &amp; behaviour correction</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ WHY US ══════════════ -->
+<section id="why" class="sec">
+  <div class="container">
+    <div class="wyg">
+      <div class="wyc sr">
+        <div class="lbl">Why Skillbridg</div>
+        <h2 class="h2">Beyond Training.<br><em>Engineered Performance.</em></h2>
+        <p class="body">Skillbridg delivers structured systems, capability transformation, and performance governance — enabling organizations to achieve measurable, predictable business outcomes across South India.</p>
+        <div class="wybt">
+          <a href="#approach" class="btn btn-bl">See Our Approach <span class="arr">→</span></a>
+          <a href="#contact"  class="btn btn-ol">Connect With Us</a>
+        </div>
+      </div>
+
+      <div class="wyf sr d2">
+        <div class="wf"><div class="wfic">⭐</div><div class="wfb"><h5>Proven On-Ground Expertise</h5><p>12+ years of experience across real estate and corporate environments — solving real performance challenges, not theoretical ones.</p></div></div>
+        <div class="wf"><div class="wfic">🔬</div><div class="wfb"><h5>Context-Driven, Not Generic</h5><p>Every engagement is built around your business goals, funnel realities, and team capability — no off-the-shelf programs.</p></div></div>
+        <div class="wf"><div class="wfic">📊</div><div class="wfb"><h5>Measurable Business Impact</h5><p>Our interventions are aligned to KPIs such as conversion, productivity, and revenue — with clear performance tracking.</p></div></div>
+        <div class="wf"><div class="wfic">⚙️</div><div class="wfb"><h5>System + Skill + Execution</h5><p>We integrate structured processes, capability building, and continuous coaching — ensuring performance is consistent, not accidental.</p></div></div>
+        <div class="wf"><div class="wfic">🔄</div><div class="wfb"><h5>Sustained Behaviour &amp; Performance Change</h5><p>Through audits, coaching, and reinforcement, we ensure learning translates into long-term performance improvement.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ TESTIMONIALS ══════════════ -->
+<section id="testi" class="sec">
+  <div class="container">
+    <div class="sh ctr sr">
+      <div class="lbl lt ctr">Client Stories</div>
+      <h2 class="h2 lt">What Our <em>Clients Say</em></h2>
+      <p class="body lt" style="margin:0 auto;max-width:460px;">Hear from the leaders and organizations we've had the privilege of partnering with.</p>
+    </div>
+
+    <div class="tcg">
+      <div class="tc sr d1">
+        <span class="tcq">"</span>
+        <p>Skillbridg's pre-sales consulting transformed how our team qualifies leads. Site visit conversions improved significantly within the first quarter of engagement.</p>
+        <div class="tcr"></div>
+        <div class="tca"><div class="tcav">GM</div><div><div class="tcn">General Manager – Sales</div><div class="tco">Leading Real Estate Developer, Chennai</div></div></div>
+      </div>
+      <div class="tc sr d2">
+        <span class="tcq">"</span>
+        <p>The performance coaching and call audit system gave our sales managers real visibility into team behaviour. Results were measurable within weeks.</p>
+        <div class="tcr"></div>
+        <div class="tca"><div class="tcav">VP</div><div><div class="tcn">VP – Operations</div><div class="tco">BFSI Organization, Chennai</div></div></div>
+      </div>
+      <div class="tc sr d3">
+        <span class="tcq">"</span>
+        <p>What sets Skillbridg apart is their system-first approach. They didn't just train our people — they redesigned our follow-up and conversion process entirely.</p>
+        <div class="tcr"></div>
+        <div class="tca"><div class="tcav">MD</div><div><div class="tcn">Managing Director</div><div class="tco">Manufacturing Firm, Tamil Nadu</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ CONTACT ══════════════ -->
+<section id="contact" class="sec">
+  <div class="container">
+    <div class="sh sr">
+      <div class="lbl">Get In Touch</div>
+      <h2 class="h2">Let's Build Something <em>Impactful</em></h2>
+    </div>
+
+    <div class="ctg">
+      <!-- Left info -->
+      <div class="cti sr">
+        <p class="body">Tell us your performance goals — we'll design a structured solution to achieve them. We help organizations build high-performing teams and predictable business outcomes across South India.</p>
+
+        <div class="perf-banner">
+          <p>At Skillbridg, we don't stop at learning. <strong>We ensure performance improves — consistently and measurably.</strong></p>
+        </div>
+
+        <div class="cis">
+          <div class="cir">
+            <div class="ciico">✉️</div>
+            <div><div class="cilbl">Email</div><div class="cival"><a href="mailto:info@skillbrig.co.in">info@skillbrig.co.in</a></div></div>
+          </div>
+          <div class="cir">
+            <div class="ciico">📞</div>
+            <div><div class="cilbl">Phone</div><div class="cival"><a href="tel:+919176543210">+91 91765 43210</a></div></div>
+          </div>
+          <div class="cir">
+            <div class="ciico">📍</div>
+            <div><div class="cilbl">Location</div><div class="cival">Chennai, Tamil Nadu, India</div></div>
+          </div>
+        </div>
+
+        <span class="slbl">Follow Us</span>
+        <div class="srow">
+          <a href="https://linkedin.com"  target="_blank" class="slk" title="LinkedIn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="2" y="9" width="4" height="12" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="4" cy="4" r="2" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="https://twitter.com"   target="_blank" class="slk" title="X">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="var(--ink)"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.402 6.231H2.744l7.732-8.854L2.25 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          </a>
+          <a href="https://facebook.com"  target="_blank" class="slk" title="Facebook">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="https://instagram.com/skillbridg" target="_blank" class="slk" title="Instagram">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right form -->
+      <div class="cfrm sr d2" id="contactForm">
+
+        <!-- Fields (hidden on success) -->
+        <div class="form-fields">
+          <div class="r2">
+            <div class="fg"><label for="f-fn">First Name <span class="req">*</span></label><input id="f-fn" type="text" placeholder="Rajan" autocomplete="given-name"></div>
+            <div class="fg"><label for="f-ln">Last Name</label><input id="f-ln" type="text" placeholder="Kumar" autocomplete="family-name"></div>
+          </div>
+          <div class="fg"><label for="f-em">Work Email <span class="req">*</span></label><input id="f-em" type="email" placeholder="rajan@yourcompany.com" autocomplete="email"></div>
+          <div class="r2">
+            <div class="fg"><label for="f-org">Organization <span class="req">*</span></label><input id="f-org" type="text" placeholder="Company Name" autocomplete="organization"></div>
+            <div class="fg">
+              <label for="f-sz">Team Size</label>
+              <select id="f-sz"><option value="">Select size…</option><option>1–25</option><option>26–100</option><option>101–500</option><option>500+</option></select>
+            </div>
+          </div>
+          <div class="fg">
+            <label for="f-pr">Program Interest</label>
+            <select id="f-pr"><option value="">Select a program…</option><option>Pre-Sales Intelligence Consulting</option><option>Sales &amp; Conversion Excellence</option><option>Leadership &amp; Performance Development</option><option>Behavioural &amp; Capability Transformation</option><option>Performance Coaching &amp; Reinforcement</option><option>Academic &amp; Employability Programs</option><option>Custom Program</option></select>
+          </div>
+          <div class="fg"><label for="f-msg">Tell Us Your Performance Goals <span class="req">*</span></label><textarea id="f-msg" placeholder="Share your performance challenges, conversion goals, or training needs — we'll design a structured solution to achieve them…"></textarea></div>
+          <div class="form-err" id="formErr"></div>
+          <button class="sbtn" id="submitBtn" type="button" onclick="submitForm()">
+            <span id="btnLabel">Send Message</span>
+            <span id="btnArrow">→</span>
+          </button>
+        </div>
+
+        <!-- Success state -->
+        <div class="form-success" id="formSuccess">
+          <div class="fsc-icon">✓</div>
+          <div class="fsc-title">Message Sent!</div>
+          <p class="fsc-body">Thank you for reaching out. Our team will get back to you within one business day.</p>
+          <button class="fsc-reset" onclick="resetForm()">Submit another enquiry</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<div class="facc"></div>
+<footer>
+  <div class="fmain">
+    <div class="container">
+      <div class="fg2">
+        <!-- Brand -->
+        <div>
+          <div class="fbl">
+            <img src="logo.png" alt="Skillbridg">
+            <div class="nlt">
+              <span class="nln" style="color:#fff;">Skillbridg</span>
+              <span class="nltg">Learning Redefined</span>
+            </div>
+          </div>
+          <p class="fbp">Leading pre-sales intelligence &amp; performance consulting firm. Engineering capability and performance across South India.</p>
+          <div class="fsr">
+            <a href="https://linkedin.com"  target="_blank" class="fsc"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="2" y="9" width="4" height="12" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="4" cy="4" r="2" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="https://twitter.com"   target="_blank" class="fsc"><svg width="13" height="13" viewBox="0 0 24 24" fill="#fff"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.402 6.231H2.744l7.732-8.854L2.25 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg></a>
+            <a href="https://facebook.com"  target="_blank" class="fsc"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="https://instagram.com/skillbridg" target="_blank" class="fsc"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+
+        <div class="fc">
+          <h5>Services</h5>
+          <ul>
+            <li><a href="#services">Pre-Sales Intelligence</a></li>
+            <li><a href="#services">Sales &amp; Conversion</a></li>
+            <li><a href="#services">Leadership Development</a></li>
+            <li><a href="#services">Capability Transformation</a></li>
+            <li><a href="#services">Academic Programs</a></li>
+          </ul>
+        </div>
+
+        <div class="fc">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="#why">About Us</a></li>
+            <li><a href="#approach">Our Approach</a></li>
+            <li><a href="#testi">Client Stories</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="fc">
+          <h5>Connect</h5>
+          <ul>
+            <li><a href="mailto:info@skillbrig.co.in">info@skillbrig.co.in</a></li>
+            <li><a href="tel:+919176543210">+91 91765 43210</a></li>
+            <li><a href="#contact">Chennai, Tamil Nadu</a></li>
+            <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
+            <li><a href="https://instagram.com/skillbridg" target="_blank">Instagram</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="fbot">
+    <div class="container">
+      <span>© 2026 <strong>Skillbridg Learning Academy</strong> · Chennai, India · All rights reserved.</span>
+      <span style="color:rgba(255,255,255,0.15);letter-spacing:3px;font-size:9px;">LEARNING REDEFINED</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════════════════
+//  EMAILJS CONFIG — fill these 3 values from emailjs.com
+// ═══════════════════════════════════════════════════════
+const EJS_PUBLIC_KEY  = "uo2NQkAjDWlaTcG5Q";    // Account → API Keys
+const EJS_SERVICE_ID  = "service_pyj4jja";    // Email Services tab
+const EJS_TEMPLATE_ID = "template_o1464xa";   // Email Templates tab
+// ═══════════════════════════════════════════════════════
+
+emailjs.init({ publicKey: EJS_PUBLIC_KEY });
+
+/* ── Form submission ── */
+async function submitForm() {
+  const btn    = document.getElementById('submitBtn');
+  const label  = document.getElementById('btnLabel');
+  const arrow  = document.getElementById('btnArrow');
+  const errBox = document.getElementById('formErr');
+
+  const firstName = document.getElementById('f-fn').value.trim();
+  const lastName  = document.getElementById('f-ln').value.trim();
+  const email     = document.getElementById('f-em').value.trim();
+  const org       = document.getElementById('f-org').value.trim();
+  const teamSize  = document.getElementById('f-sz').value;
+  const program   = document.getElementById('f-pr').value;
+  const message   = document.getElementById('f-msg').value.trim();
+
+  // Validation
+  errBox.classList.remove('show');
+  if (!firstName)                      return showErr('Please enter your first name.');
+  if (!email || !email.includes('@'))  return showErr('Please enter a valid work email.');
+  if (!org)                            return showErr('Please enter your organization name.');
+  if (!message)                        return showErr('Please share your performance goals or message.');
+
+  // Loading state
+  btn.disabled      = true;
+  label.textContent = 'Sending…';
+  arrow.innerHTML   = '<span class="spin"></span>';
+
+  try {
+    await emailjs.send(EJS_SERVICE_ID, EJS_TEMPLATE_ID, {
+      first_name : firstName,
+      last_name  : lastName,
+      from_email : email,
+      org        : org,
+      team_size  : teamSize  || 'Not specified',
+      program    : program   || 'Not specified',
+      message    : message
+    });
+    showSuccess();
+  } catch (err) {
+    console.error(err);
+    showErr('Something went wrong. Please try again or email us at info@skillbrig.co.in');
+    btn.disabled      = false;
+    label.textContent = 'Send Message';
+    arrow.textContent = '→';
+  }
+}
+
+function showErr(msg) {
+  const e = document.getElementById('formErr');
+  e.textContent = msg;
+  e.classList.add('show');
+}
+
+function showSuccess() {
+  document.getElementById('contactForm').classList.add('sent');
+}
+
+function resetForm() {
+  document.getElementById('contactForm').classList.remove('sent');
+  ['f-fn','f-ln','f-em','f-org','f-msg'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('f-sz').selectedIndex = 0;
+  document.getElementById('f-pr').selectedIndex = 0;
+  document.getElementById('formErr').classList.remove('show');
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = false;
+  document.getElementById('btnLabel').textContent = 'Send Message';
+  document.getElementById('btnArrow').textContent = '→';
+}
+
+/* ── Mobile nav ── */
+const hbg = document.getElementById('hbg');
+const mn  = document.getElementById('mnav');
+function cm() { hbg.classList.remove('op'); mn.classList.remove('op'); document.body.style.overflow = ''; }
+hbg.addEventListener('click', () => {
+  const o = hbg.classList.toggle('op');
+  mn.classList.toggle('op', o);
+  document.body.style.overflow = o ? 'hidden' : '';
+});
+
+/* ── Nav scroll shadow ── */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('sc', window.scrollY > 40), { passive:true });
+
+/* ── Scroll reveal ── */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); } });
+}, { threshold:.07, rootMargin:'0px 0px -20px 0px' });
+document.querySelectorAll('.sr').forEach(el => io.observe(el));
+
+/* ── Smooth anchor scroll ── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href');
+    if (!id || id === '#') return;
+    const t = document.querySelector(id);
+    if (!t) return;
+    e.preventDefault();
+    const nh = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 68;
+    window.scrollTo({ top: t.getBoundingClientRect().top + window.pageYOffset - nh, behavior:'smooth' });
+    cm();
+  });
+});
+</script>
+</body>
+</html>
