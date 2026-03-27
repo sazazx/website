@@ -6,7 +6,7 @@ Official website for **Skillbridg Learning Academy**, a leading pre-sales intell
 
 ## 🌐 Live Site
 
-[www.skillbridglearningacademy.in](https://www.skillbridglearningacademy.in)
+[www.skillbridg.co.in](https://www.skillbridg.co.in)
 
 ---
 
